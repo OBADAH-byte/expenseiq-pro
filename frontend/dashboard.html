@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard — ExpenseIQ Pro</title>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/dashboard.css" />
+<link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand"><div class="sidebar-logo">💎</div><span class="sidebar-title">ExpenseIQ</span></div>
+  <nav class="sidebar-nav">
+    <a href="dashboard.html" class="sidebar-link active"><span class="icon">🏠</span>Dashboard</a>
+    <a href="expenses.html" class="sidebar-link"><span class="icon">💳</span>Expenses</a>
+    <a href="goals.html" class="sidebar-link"><span class="icon">🎯</span>Goals</a>
+    <a href="badges.html" class="sidebar-link"><span class="icon">🏆</span>Badges</a>
+    <a href="reports.html" class="sidebar-link"><span class="icon">📄</span>Reports</a>
+    <a href="settings.html" class="sidebar-link"><span class="icon">⚙️</span>Settings</a>
+    <a href="developer.html" class="sidebar-link"><span class="icon">👨‍💻</span>Developer</a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="sidebar-avatar" id="user-avatar">U</div>
+      <div style="min-width:0;"><div style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" id="user-name">Loading...</div>
+      <div style="font-size:11px;color:var(--text-muted);" id="user-email"></div></div>
+    </div>
+    <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:8px;" onclick="logout()">🚪 Logout</button>
+  </div>
+</aside>
+
+<main class="main-content page-transition">
+  <div class="page-header" style="display:flex;align-items:center;justify-content:space-between;">
+    <div><h1 class="page-title">Dashboard</h1><p class="page-subtitle" id="greeting">Good morning! Here's your financial overview.</p></div>
+    <div style="display:flex;gap:10px;">
+      <button class="btn btn-outline btn-sm" onclick="toggleTheme();location.reload()">🌙 Theme</button>
+      <a href="expenses.html" class="btn btn-primary btn-sm">+ Add Expense</a>
+    </div>
+  </div>
+
+  <!-- Stat Cards -->
+  <div class="grid grid-4 animate-fade" id="stats-grid">
+    <div class="stat-card skeleton" style="height:120px;"></div>
+    <div class="stat-card skeleton" style="height:120px;"></div>
+    <div class="stat-card skeleton" style="height:120px;"></div>
+    <div class="stat-card skeleton" style="height:120px;"></div>
+  </div>
+
+  <!-- Charts Row -->
+  <div class="grid grid-2" style="margin-top:20px;">
+    <div class="card animate-fade stagger-2">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <h3 style="font-size:16px;font-weight:600;">Monthly Spending</h3>
+        <span class="badge-pill badge-primary">6 months</span>
+      </div>
+      <div class="chart-container"><canvas id="spending-chart"></canvas></div>
+    </div>
+    <div class="card animate-fade stagger-3">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <h3 style="font-size:16px;font-weight:600;">By Category</h3>
+        <span class="badge-pill badge-success">All time</span>
+      </div>
+      <div class="chart-container"><canvas id="category-chart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Recent Transactions + Insights -->
+  <div class="grid grid-2" style="margin-top:20px;">
+    <div class="card animate-fade stagger-4">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <h3 style="font-size:16px;font-weight:600;">Recent Transactions</h3>
+        <a href="expenses.html" style="font-size:13px;color:var(--primary);text-decoration:none;">View all →</a>
+      </div>
+      <div class="transaction-list" id="recent-transactions">
+        <div class="skeleton" style="height:56px;border-radius:10px;"></div>
+        <div class="skeleton" style="height:56px;border-radius:10px;margin-top:12px;"></div>
+        <div class="skeleton" style="height:56px;border-radius:10px;margin-top:12px;"></div>
+      </div>
+    </div>
+    <div class="card animate-fade stagger-5">
+      <h3 style="font-size:16px;font-weight:600;margin-bottom:20px;">💡 Financial Insights</h3>
+      <div id="insights-container"><div class="skeleton" style="height:80px;border-radius:10px;"></div></div>
+    </div>
+  </div>
+</main>
+
+<script src="js/theme.js"></script>
+<script src="js/api.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

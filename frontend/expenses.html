@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Expenses — ExpenseIQ Pro</title>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+<aside class="sidebar">
+  <div class="sidebar-brand"><div class="sidebar-logo">💎</div><span class="sidebar-title">ExpenseIQ</span></div>
+  <nav class="sidebar-nav">
+    <a href="dashboard.html" class="sidebar-link"><span class="icon">🏠</span>Dashboard</a>
+    <a href="expenses.html" class="sidebar-link active"><span class="icon">💳</span>Expenses</a>
+    <a href="goals.html" class="sidebar-link"><span class="icon">🎯</span>Goals</a>
+    <a href="badges.html" class="sidebar-link"><span class="icon">🏆</span>Badges</a>
+    <a href="reports.html" class="sidebar-link"><span class="icon">📄</span>Reports</a>
+    <a href="settings.html" class="sidebar-link"><span class="icon">⚙️</span>Settings</a>
+    <a href="developer.html" class="sidebar-link"><span class="icon">👨‍💻</span>Developer</a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="sidebar-user"><div class="sidebar-avatar" id="user-avatar">U</div><div><div style="font-size:13px;font-weight:600;" id="user-name">Loading...</div></div></div>
+    <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:8px;" onclick="logout()">🚪 Logout</button>
+  </div>
+</aside>
+
+<main class="main-content page-transition">
+  <div class="page-header" style="display:flex;align-items:center;justify-content:space-between;">
+    <div><h1 class="page-title">Expenses</h1><p class="page-subtitle">Track and manage all your spending</p></div>
+    <div style="display:flex;gap:10px;">
+      <button class="btn btn-outline btn-sm" onclick="exportExcel()">📥 Export Excel</button>
+      <button class="btn btn-primary btn-sm" onclick="openModal()">+ Add Expense</button>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="card animate-fade" style="margin-bottom:20px;">
+    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;">
+      <div style="flex:1;min-width:200px;">
+        <label class="form-label">Search</label>
+        <input type="text" id="search" class="form-control" placeholder="Search descriptions..." oninput="filterChanged()" />
+      </div>
+      <div>
+        <label class="form-label">Category</label>
+        <select id="category-filter" class="form-control" onchange="filterChanged()">
+          <option value="all">All Categories</option>
+          <option>Food</option><option>Transport</option><option>Shopping</option>
+          <option>Entertainment</option><option>Health</option><option>Bills</option>
+          <option>Education</option><option>Travel</option><option>Other</option>
+        </select>
+      </div>
+      <div>
+        <label class="form-label">From</label>
+        <input type="date" id="start-date" class="form-control" onchange="filterChanged()" />
+      </div>
+      <div>
+        <label class="form-label">To</label>
+        <input type="date" id="end-date" class="form-control" onchange="filterChanged()" />
+      </div>
+      <button class="btn btn-ghost btn-sm" onclick="clearFilters()">✕ Clear</button>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="card animate-fade stagger-2">
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>Date</th><th>Description</th><th>Category</th><th>Amount</th><th>Currency</th><th>Actions</th></tr></thead>
+        <tbody id="expenses-tbody"><tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-muted);">Loading expenses...</td></tr></tbody>
+      </table>
+    </div>
+    <div id="pagination" style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;font-size:13px;color:var(--text-muted);"></div>
+  </div>
+</main>
+
+<!-- Add/Edit Modal -->
+<div class="modal-overlay" id="expense-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title" id="modal-title">Add Expense</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="form-group"><label class="form-label">Amount *</label><input type="number" id="exp-amount" class="form-control" placeholder="0.00" min="0.01" step="0.01" /></div>
+    <div class="grid grid-2" style="gap:12px;">
+      <div class="form-group"><label class="form-label">Category *</label>
+        <select id="exp-category" class="form-control">
+          <option>Food</option><option>Transport</option><option>Shopping</option>
+          <option>Entertainment</option><option>Health</option><option>Bills</option>
+          <option>Education</option><option>Travel</option><option>Other</option>
+        </select>
+      </div>
+      <div class="form-group"><label class="form-label">Currency</label>
+        <select id="exp-currency" class="form-control"><option>USD</option><option>EUR</option><option>GBP</option><option>INR</option></select>
+      </div>
+    </div>
+    <div class="form-group"><label class="form-label">Description</label><input type="text" id="exp-desc" class="form-control" placeholder="Optional description" /></div>
+    <div class="form-group"><label class="form-label">Date</label><input type="date" id="exp-date" class="form-control" /></div>
+    <div style="display:flex;gap:10px;margin-top:8px;">
+      <button class="btn btn-outline" onclick="closeModal()" style="flex:1;">Cancel</button>
+      <button class="btn btn-primary" id="save-btn" onclick="saveExpense()" style="flex:2;">Save Expense</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/theme.js"></script>
+<script src="js/api.js"></script>
+<script src="js/expenses.js"></script>
+</body>
+</html>

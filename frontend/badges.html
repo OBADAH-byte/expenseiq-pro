@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Badges — ExpenseIQ Pro</title>
+<link rel="stylesheet" href="css/style.css" /><link rel="stylesheet" href="css/animations.css" />
+<style>
+.badge-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; text-align: center; transition: var(--transition); position: relative; overflow: hidden; }
+.badge-card.earned { border-color: rgba(99,102,241,0.4); background: linear-gradient(135deg, rgba(99,102,241,0.05), var(--bg-card)); }
+.badge-card.locked { opacity: 0.5; filter: grayscale(0.5); }
+.badge-card.earned::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(99,102,241,0.05), transparent); }
+.badge-icon-wrap { width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 38px; }
+.badge-card.earned .badge-icon-wrap { background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(139,92,246,0.15)); box-shadow: 0 0 30px rgba(99,102,241,0.3); }
+.badge-card.locked .badge-icon-wrap { background: var(--bg-elevated); }
+.badge-name { font-weight: 700; font-size: 15px; margin-bottom: 6px; }
+.badge-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px; }
+.badge-req { font-size: 11px; color: var(--text-faint); font-style: italic; }
+.badge-date { font-size: 11px; color: var(--primary); font-weight: 600; margin-top: 8px; }
+.badge-lock { font-size: 20px; position: absolute; top: 12px; right: 12px; }
+.progress-summary { background: linear-gradient(135deg, var(--primary), #8b5cf6); border-radius: var(--radius-lg); padding: 28px; color: #fff; text-align: center; margin-bottom: 24px; }
+.progress-summary h2 { font-family: var(--font-display); font-size: 36px; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="sidebar-brand"><div class="sidebar-logo">💎</div><span class="sidebar-title">ExpenseIQ</span></div>
+  <nav class="sidebar-nav">
+    <a href="dashboard.html" class="sidebar-link"><span class="icon">🏠</span>Dashboard</a>
+    <a href="expenses.html" class="sidebar-link"><span class="icon">💳</span>Expenses</a>
+    <a href="goals.html" class="sidebar-link"><span class="icon">🎯</span>Goals</a>
+    <a href="badges.html" class="sidebar-link active"><span class="icon">🏆</span>Badges</a>
+    <a href="reports.html" class="sidebar-link"><span class="icon">📄</span>Reports</a>
+    <a href="settings.html" class="sidebar-link"><span class="icon">⚙️</span>Settings</a>
+    <a href="developer.html" class="sidebar-link"><span class="icon">👨‍💻</span>Developer</a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="sidebar-user"><div class="sidebar-avatar" id="user-avatar">U</div><div><div style="font-size:13px;font-weight:600;" id="user-name">Loading...</div></div></div>
+    <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:8px;" onclick="logout()">🚪 Logout</button>
+  </div>
+</aside>
+<main class="main-content page-transition">
+  <div class="page-header"><h1 class="page-title">Achievement Badges</h1><p class="page-subtitle">Earn badges by building great financial habits</p></div>
+  <div class="progress-summary animate-fade" id="badge-summary">
+    <h2>🏆 Loading...</h2><p>Calculating your achievements...</p>
+  </div>
+  <div class="grid grid-4" id="badges-grid">
+    <div class="badge-card skeleton" style="height:220px;"></div>
+    <div class="badge-card skeleton" style="height:220px;"></div>
+    <div class="badge-card skeleton" style="height:220px;"></div>
+  </div>
+</main>
+<script src="js/theme.js"></script><script src="js/api.js"></script>
+<script>
+if (!requireAuth()) throw new Error('Not authenticated');
+const user = getUser();
+document.getElementById('user-name').textContent = user?.name || 'User';
+document.getElementById('user-avatar').textContent = (user?.name?.[0] || 'U').toUpperCase();
+function logout() { clearAuth(); window.location.href = '/login.html'; }
+
+async function loadBadges() {
+  try {
+    const data = await API.badges.getAll();
+    document.getElementById('badge-summary').innerHTML = `
+      <h2>🏆 ${data.earnedCount} / ${data.totalCount}</h2>
+      <p>Badges Earned · Keep building great habits!</p>
+      <div class="progress-bar" style="margin:16px auto 0;max-width:300px;background:rgba(255,255,255,0.2);">
+        <div class="progress-fill" style="width:${Math.round(data.earnedCount/data.totalCount*100)}%;background:#fff;"></div>
+      </div>`;
+    document.getElementById('badges-grid').innerHTML = data.badges.map(b => `
+      <div class="badge-card ${b.earned ? 'earned animate-badge' : 'locked'}">
+        ${!b.earned ? '<div class="badge-lock">🔒</div>' : '<div class="badge-lock" style="color:var(--success)">✓</div>'}
+        <div class="badge-icon-wrap">${b.icon}</div>
+        <div class="badge-name">${b.badgeName}</div>
+        <div class="badge-desc">${b.description}</div>
+        <div class="badge-req">${b.requirement}</div>
+        ${b.earned ? `<div class="badge-date">Earned ${new Date(b.earnedDate).toLocaleDateString()}</div>` : ''}
+      </div>`).join('');
+  } catch(e) { showToast(e.message, 'error'); }
+}
+loadBadges();
+</script>
+</body>
+</html>

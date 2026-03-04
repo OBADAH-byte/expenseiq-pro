@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Login — ExpenseIQ Pro</title>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/auth.css" />
+<link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+<div class="auth-page">
+  <div class="auth-left">
+    <div class="auth-left-content">
+      <div class="auth-brand"><div class="auth-logo">💎</div><span class="auth-brand-name">ExpenseIQ Pro</span></div>
+      <h2 class="auth-tagline">Welcome<br>back to your<br><span>financial hub.</span></h2>
+      <p class="auth-desc">Sign in to access your personalized dashboard, track expenses, and see your progress toward financial freedom.</p>
+      <div class="auth-features">
+        <div class="auth-feature"><div class="auth-feature-icon">📊</div>Real-time spending analytics</div>
+        <div class="auth-feature"><div class="auth-feature-icon">🎯</div>Savings goal tracking</div>
+        <div class="auth-feature"><div class="auth-feature-icon">🏆</div>Gamified financial habits</div>
+        <div class="auth-feature"><div class="auth-feature-icon">🔒</div>Bank-grade security</div>
+      </div>
+    </div>
+  </div>
+  <div class="auth-right">
+    <div class="auth-form-wrapper animate-fade">
+      <h1 class="auth-form-title">Sign In</h1>
+      <p class="auth-form-subtitle">Enter your credentials to access your account</p>
+      <div id="error-msg" style="display:none;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#ef4444;padding:12px;border-radius:10px;margin-bottom:16px;font-size:14px;"></div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input type="email" id="email" class="form-control" placeholder="you@example.com" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <div class="password-wrapper">
+          <input type="password" id="password" class="form-control" placeholder="Enter your password" required />
+          <button class="password-toggle" onclick="togglePwd()">👁️</button>
+        </div>
+      </div>
+      <button class="btn btn-primary" style="width:100%;margin-top:8px;" id="login-btn" onclick="handleLogin()">Sign In</button>
+      <div class="auth-divider">or</div>
+      <button class="btn btn-outline" style="width:100%;" onclick="handleGuest()">👤 Continue as Guest</button>
+      <div class="auth-switch">Don't have an account? <a href="signup.html">Create one</a></div>
+    </div>
+  </div>
+</div>
+<script src="js/theme.js"></script>
+<script src="js/api.js"></script>
+<script>
+if (getToken()) window.location.href = '/dashboard.html';
+
+function togglePwd() {
+  const p = document.getElementById('password');
+  p.type = p.type === 'password' ? 'text' : 'password';
+}
+
+async function handleLogin() {
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+  const btn = document.getElementById('login-btn');
+  const err = document.getElementById('error-msg');
+  if (!email || !password) { showError('Please fill in all fields'); return; }
+  btn.disabled = true; btn.textContent = 'Signing in...';
+  try {
+    const data = await API.auth.login({ email, password });
+    setAuth(data.token, data.user);
+    showToast('Welcome back, ' + data.user.name + '! 👋');
+    setTimeout(() => window.location.href = '/dashboard.html', 800);
+  } catch (e) {
+    if (e.message.includes('verify')) { showError(e.message + ' — <a href="signup.html" style="color:var(--primary)">Verify email</a>'); }
+    else showError(e.message || 'Login failed');
+    btn.disabled = false; btn.textContent = 'Sign In';
+  }
+}
+
+async function handleGuest() {
+  const btn = event.target;
+  btn.disabled = true; btn.textContent = 'Loading...';
+  try {
+    const data = await API.auth.guest();
+    setAuth(data.token, data.user);
+    showToast('Welcome, Guest! 👤');
+    setTimeout(() => window.location.href = '/dashboard.html', 800);
+  } catch (e) { showError('Guest login failed'); btn.disabled = false; btn.textContent = '👤 Continue as Guest'; }
+}
+
+function showError(msg) {
+  const err = document.getElementById('error-msg');
+  err.innerHTML = msg; err.style.display = 'block';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Enter') handleLogin(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!-- Shared sidebar template for all app pages -->
+<!-- Include this in each page's sidebar div -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-icon">💎</div>
+    <div>
+      <div class="sidebar-logo-text">ExpenseIQ Pro</div>
+      <div class="sidebar-logo-sub">v3.0</div>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-label">Main</div>
+      <a href="/dashboard.html" class="nav-item" data-page="dashboard">
+        <span class="nav-item-icon">📊</span>
+        Dashboard
+      </a>
+      <a href="/expenses.html" class="nav-item" data-page="expenses">
+        <span class="nav-item-icon">💸</span>
+        Expenses
+      </a>
+      <a href="/goals.html" class="nav-item" data-page="goals">
+        <span class="nav-item-icon">🎯</span>
+        Goals
+      </a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Insights</div>
+      <a href="/reports.html" class="nav-item" data-page="reports">
+        <span class="nav-item-icon">📄</span>
+        Reports
+      </a>
+      <a href="/badges.html" class="nav-item" data-page="badges">
+        <span class="nav-item-icon">🏆</span>
+        Badges
+      </a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Account</div>
+      <a href="/settings.html" class="nav-item" data-page="settings">
+        <span class="nav-item-icon">⚙️</span>
+        Settings
+      </a>
+      <a href="/developer.html" class="nav-item" data-page="developer">
+        <span class="nav-item-icon">👨‍💻</span>
+        Developer
+      </a>
+    </div>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="user-card" onclick="window.location.href='/settings.html'">
+      <div class="user-avatar" id="sidebarAvatar">?</div>
+      <div class="user-info">
+        <div class="user-name" id="sidebarName">Loading...</div>
+        <div class="user-email" id="sidebarEmail">...</div>
+      </div>
+      <span style="color:var(--text-dim);font-size:16px">⚙</span>
+    </div>
+    <button onclick="logout()" style="width:100%;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);border-radius:8px;color:#FCA5A5;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;transition:all 0.2s" onmouseover="this.style.background='rgba(239,68,68,0.2)'" onmouseout="this.style.background='rgba(239,68,68,0.1)'">
+      🚪 Sign Out
+    </button>
+  </div>
+</div>

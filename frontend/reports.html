@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Reports — ExpenseIQ Pro</title>
+<link rel="stylesheet" href="css/style.css" /><link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+<aside class="sidebar">
+  <div class="sidebar-brand"><div class="sidebar-logo">💎</div><span class="sidebar-title">ExpenseIQ</span></div>
+  <nav class="sidebar-nav">
+    <a href="dashboard.html" class="sidebar-link"><span class="icon">🏠</span>Dashboard</a>
+    <a href="expenses.html" class="sidebar-link"><span class="icon">💳</span>Expenses</a>
+    <a href="goals.html" class="sidebar-link"><span class="icon">🎯</span>Goals</a>
+    <a href="badges.html" class="sidebar-link"><span class="icon">🏆</span>Badges</a>
+    <a href="reports.html" class="sidebar-link active"><span class="icon">📄</span>Reports</a>
+    <a href="settings.html" class="sidebar-link"><span class="icon">⚙️</span>Settings</a>
+    <a href="developer.html" class="sidebar-link"><span class="icon">👨‍💻</span>Developer</a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="sidebar-user"><div class="sidebar-avatar" id="user-avatar">U</div><div><div style="font-size:13px;font-weight:600;" id="user-name">Loading...</div></div></div>
+    <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:8px;" onclick="logout()">🚪 Logout</button>
+  </div>
+</aside>
+<main class="main-content page-transition">
+  <div class="page-header" style="display:flex;align-items:center;justify-content:space-between;">
+    <div><h1 class="page-title">Reports</h1><p class="page-subtitle">Generate and export financial reports</p></div>
+    <div style="display:flex;gap:10px;">
+      <button class="btn btn-outline btn-sm" onclick="exportCSV()">📊 Export CSV</button>
+      <button class="btn btn-primary btn-sm" onclick="exportPDF()">📄 Export PDF</button>
+    </div>
+  </div>
+
+  <!-- Month/Year selector -->
+  <div class="card animate-fade" style="margin-bottom:20px;">
+    <div style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;">
+      <div><label class="form-label">Month</label>
+        <select id="report-month" class="form-control" onchange="loadReport()">
+          <option value="1">January</option><option value="2">February</option><option value="3">March</option>
+          <option value="4">April</option><option value="5">May</option><option value="6">June</option>
+          <option value="7">July</option><option value="8">August</option><option value="9">September</option>
+          <option value="10">October</option><option value="11">November</option><option value="12">December</option>
+        </select>
+      </div>
+      <div><label class="form-label">Year</label><input type="number" id="report-year" class="form-control" value="2026" min="2020" max="2030" onchange="loadReport()" style="width:100px;" /></div>
+    </div>
+  </div>
+
+  <div id="report-content">
+    <div class="grid grid-3" style="margin-bottom:20px;">
+      <div class="stat-card skeleton" style="height:100px;"></div>
+      <div class="stat-card skeleton" style="height:100px;"></div>
+      <div class="stat-card skeleton" style="height:100px;"></div>
+    </div>
+  </div>
+</main>
+<script src="js/theme.js"></script><script src="js/api.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/reports.js"></script>
+</body>
+</html>

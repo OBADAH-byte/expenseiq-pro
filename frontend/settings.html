@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Settings — ExpenseIQ Pro</title>
+<link rel="stylesheet" href="css/style.css" /><link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+<aside class="sidebar">
+  <div class="sidebar-brand"><div class="sidebar-logo">💎</div><span class="sidebar-title">ExpenseIQ</span></div>
+  <nav class="sidebar-nav">
+    <a href="dashboard.html" class="sidebar-link"><span class="icon">🏠</span>Dashboard</a>
+    <a href="expenses.html" class="sidebar-link"><span class="icon">💳</span>Expenses</a>
+    <a href="goals.html" class="sidebar-link"><span class="icon">🎯</span>Goals</a>
+    <a href="badges.html" class="sidebar-link"><span class="icon">🏆</span>Badges</a>
+    <a href="reports.html" class="sidebar-link"><span class="icon">📄</span>Reports</a>
+    <a href="settings.html" class="sidebar-link active"><span class="icon">⚙️</span>Settings</a>
+    <a href="developer.html" class="sidebar-link"><span class="icon">👨‍💻</span>Developer</a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="sidebar-user"><div class="sidebar-avatar" id="user-avatar">U</div><div><div style="font-size:13px;font-weight:600;" id="user-name">Loading...</div></div></div>
+    <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:8px;" onclick="logout()">🚪 Logout</button>
+  </div>
+</aside>
+<main class="main-content page-transition">
+  <div class="page-header"><h1 class="page-title">Settings</h1><p class="page-subtitle">Manage your account and preferences</p></div>
+
+  <div class="grid grid-2" style="align-items:start;">
+    <!-- Profile -->
+    <div class="card animate-fade">
+      <h3 style="font-size:16px;font-weight:600;margin-bottom:20px;">👤 Profile</h3>
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;">
+        <div id="profile-avatar" style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--primary),#8b5cf6);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:#fff;flex-shrink:0;">U</div>
+        <div><div id="profile-name" style="font-weight:600;font-size:16px;"></div><div id="profile-email" style="font-size:13px;color:var(--text-muted);"></div></div>
+      </div>
+      <div class="form-group"><label class="form-label">Full Name</label><input type="text" id="s-name" class="form-control" /></div>
+      <div class="form-group"><label class="form-label">Currency</label>
+        <select id="s-currency" class="form-control"><option value="USD">🇺🇸 USD — US Dollar</option><option value="EUR">🇪🇺 EUR — Euro</option><option value="GBP">🇬🇧 GBP — British Pound</option><option value="INR">🇮🇳 INR — Indian Rupee</option></select>
+      </div>
+      <div class="form-group"><label class="form-label">Theme</label>
+        <select id="s-theme" class="form-control"><option value="dark">🌙 Dark</option><option value="light">☀️ Light</option></select>
+      </div>
+      <button class="btn btn-primary" onclick="saveProfile()">Save Profile</button>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:20px;">
+      <!-- Notifications -->
+      <div class="card animate-fade stagger-2">
+        <h3 style="font-size:16px;font-weight:600;margin-bottom:20px;">🔔 Notifications</h3>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div><div style="font-size:14px;font-weight:500;">Email Notifications</div><div style="font-size:12px;color:var(--text-muted);">Receive email updates</div></div>
+            <label style="position:relative;cursor:pointer;"><input type="checkbox" id="notif-email" style="display:none;" /><div id="toggle-email" onclick="toggleNotif('email')" style="width:44px;height:24px;border-radius:12px;background:var(--border);cursor:pointer;transition:var(--transition);position:relative;"><div style="width:18px;height:18px;border-radius:50%;background:#fff;position:absolute;top:3px;left:3px;transition:var(--transition);"></div></div></label>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div><div style="font-size:14px;font-weight:500;">Budget Alerts</div><div style="font-size:12px;color:var(--text-muted);">Alert when over budget</div></div>
+            <div id="toggle-budget" onclick="toggleNotif('budget')" style="width:44px;height:24px;border-radius:12px;background:var(--border);cursor:pointer;transition:var(--transition);position:relative;"><div style="width:18px;height:18px;border-radius:50%;background:#fff;position:absolute;top:3px;left:3px;transition:var(--transition);"></div></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div><div style="font-size:14px;font-weight:500;">Goal Updates</div><div style="font-size:12px;color:var(--text-muted);">Progress on savings goals</div></div>
+            <div id="toggle-goals" onclick="toggleNotif('goals')" style="width:44px;height:24px;border-radius:12px;background:var(--border);cursor:pointer;transition:var(--transition);position:relative;"><div style="width:18px;height:18px;border-radius:50%;background:#fff;position:absolute;top:3px;left:3px;transition:var(--transition);"></div></div>
+          </div>
+        </div>
+        <button class="btn btn-outline btn-sm" style="margin-top:16px;" onclick="saveNotifications()">Save Preferences</button>
+      </div>
+
+      <!-- Change Password -->
+      <div class="card animate-fade stagger-3">
+        <h3 style="font-size:16px;font-weight:600;margin-bottom:20px;">🔒 Change Password</h3>
+        <div class="form-group"><label class="form-label">Current Password</label><input type="password" id="current-pwd" class="form-control" /></div>
+        <div class="form-group"><label class="form-label">New Password</label><input type="password" id="new-pwd" class="form-control" /></div>
+        <div class="form-group"><label class="form-label">Confirm New Password</label><input type="password" id="confirm-pwd" class="form-control" /></div>
+        <button class="btn btn-primary" onclick="changePassword()">Update Password</button>
+      </div>
+
+      <!-- Danger Zone -->
+      <div class="card animate-fade stagger-4" style="border-color:rgba(239,68,68,0.3);">
+        <h3 style="font-size:16px;font-weight:600;margin-bottom:12px;color:var(--danger);">⚠️ Account</h3>
+        <button class="btn btn-danger btn-sm" onclick="logout()">🚪 Logout from this device</button>
+      </div>
+    </div>
+  </div>
+</main>
+<script src="js/theme.js"></script><script src="js/api.js"></script>
+<script src="js/settings.js"></script>
+</body>
+</html>

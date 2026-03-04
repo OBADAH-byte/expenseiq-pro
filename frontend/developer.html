@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Developer — ExpenseIQ Pro</title>
+<link rel="stylesheet" href="css/style.css" /><link rel="stylesheet" href="css/animations.css" />
+<style>
+.dev-hero { background: linear-gradient(135deg, #020617, #0f172a, #1e1b4b); min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+.dev-card { max-width: 700px; width: 100%; margin: 0 auto; background: rgba(15,23,42,0.8); border: 1px solid rgba(99,102,241,0.3); border-radius: 24px; padding: 48px; backdrop-filter: blur(20px); position: relative; overflow: hidden; }
+.dev-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(99,102,241,0.08), transparent); pointer-events: none; }
+.avatar-ring { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, #6366f1, #8b5cf6); display: flex; align-items: center; justify-content: center; font-size: 52px; margin: 0 auto 24px; box-shadow: 0 0 60px rgba(99,102,241,0.4); animation: float 3s ease-in-out infinite; }
+.dev-name { font-family: 'DM Serif Display', serif; font-size: 36px; text-align: center; margin-bottom: 8px; color: #fff; }
+.dev-role { text-align: center; color: #6366f1; font-weight: 600; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 24px; }
+.dev-desc { color: #94a3b8; font-size: 15px; line-height: 1.8; text-align: center; margin-bottom: 32px; }
+.tech-stack { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 32px; }
+.tech-badge { background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.3); color: #a78bfa; padding: 6px 16px; border-radius: 100px; font-size: 13px; font-weight: 500; font-family: 'JetBrains Mono', monospace; }
+.divider { height: 1px; background: rgba(99,102,241,0.2); margin: 24px 0; }
+.meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.meta-item { background: rgba(30,41,59,0.8); border: 1px solid rgba(30,41,59,1); border-radius: 12px; padding: 14px 18px; }
+.meta-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #475569; margin-bottom: 4px; }
+.meta-value { font-size: 14px; font-weight: 600; color: #e2e8f0; font-family: 'JetBrains Mono', monospace; }
+.footer-text { text-align: center; color: #475569; font-size: 12px; margin-top: 24px; line-height: 1.8; }
+</style>
+</head>
+<body>
+<div class="dev-hero">
+  <div style="padding:40px;width:100%;">
+    <div style="text-align:center;margin-bottom:32px;">
+      <a href="/" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.3);padding:8px 20px;border-radius:100px;color:#6366f1;font-size:13px;font-weight:600;">← Back to ExpenseIQ Pro</a>
+    </div>
+    <div class="dev-card animate-fade">
+      <div class="avatar-ring">👨‍💻</div>
+      <h1 class="dev-name">Obadah Furquan</h1>
+      <div class="dev-role">Full-Stack Developer</div>
+      <p class="dev-desc">ExpenseIQ Pro is a full-stack personal finance application built with a production-ready Node.js + MongoDB backend, JWT authentication, and real-time email verification. Designed to make financial management intuitive, intelligent, and enjoyable.</p>
+      <div class="tech-stack">
+        <span class="tech-badge">HTML5</span>
+        <span class="tech-badge">CSS3</span>
+        <span class="tech-badge">JavaScript</span>
+        <span class="tech-badge">Node.js</span>
+        <span class="tech-badge">Express.js</span>
+        <span class="tech-badge">MongoDB</span>
+        <span class="tech-badge">Mongoose</span>
+        <span class="tech-badge">JWT</span>
+        <span class="tech-badge">bcrypt</span>
+        <span class="tech-badge">Chart.js</span>
+        <span class="tech-badge">Three.js</span>
+        <span class="tech-badge">GSAP</span>
+        <span class="tech-badge">Nodemailer</span>
+      </div>
+      <div class="divider"></div>
+      <div class="meta-grid">
+        <div class="meta-item"><div class="meta-label">Version</div><div class="meta-value">3.0</div></div>
+        <div class="meta-item"><div class="meta-label">Year</div><div class="meta-value">2026</div></div>
+        <div class="meta-item"><div class="meta-label">Made In</div><div class="meta-value">India 🇮🇳</div></div>
+        <div class="meta-item"><div class="meta-label">License</div><div class="meta-value">All Rights Reserved</div></div>
+      </div>
+      <div class="footer-text">
+        <strong style="color:#e2e8f0;">Created by Obadah Furquan</strong><br>
+        © 2026 Obadah Furquan — All intellectual property rights reserved.<br>
+        <span style="color:#6366f1;">HTML · Node.js · MongoDB · Made in India 🇮🇳 · Year 2026</span>
+      </div>
+    </div>
+  </div>
+</div>
+<canvas id="hero-canvas" style="position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.3;"></canvas>
+<script src="js/theme.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const canvas = document.getElementById('hero-canvas');
+const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
+camera.position.z = 6;
+const geometry = new THREE.IcosahedronGeometry(0.8, 1);
+const shapes = [];
+for (let i = 0; i < 6; i++) {
+  const mat = new THREE.MeshBasicMaterial({ color: 0x6366f1, wireframe: true, transparent: true, opacity: 0.2 });
+  const mesh = new THREE.Mesh(geometry, mat);
+  mesh.position.set((Math.random()-0.5)*12, (Math.random()-0.5)*10, (Math.random()-0.5)*6-2);
+  scene.add(mesh);
+  shapes.push({ mesh, speed: Math.random()*0.005+0.001 });
+}
+let t = 0;
+(function animate() { requestAnimationFrame(animate); t+=0.01; shapes.forEach(s => { s.mesh.rotation.x+=s.speed; s.mesh.rotation.y+=s.speed*0.7; }); renderer.render(scene, camera); })();
+</script>
+</body>
+</html>
