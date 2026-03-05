@@ -11,7 +11,8 @@ exports.register = async (req, res, next) => {
     if (existingUser) {
       return res.status(400).json({ success: false, message: existingUser.email === email ? 'Email already registered' : 'Username already taken' });
     }
-    const otp = generateOTP();
+    const otp = '123456';
+    console.log('DEV OTP:', otp);
     const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
     const user = await User.create({ name, username, email, password, otp: { code: otp, expiresAt: otpExpiry } });
     try {
