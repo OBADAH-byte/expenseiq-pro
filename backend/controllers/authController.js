@@ -15,10 +15,23 @@ exports.register = async (req, res, next) => {
     const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
     const user = await User.create({ name, username, email, password, otp: { code: otp, expiresAt: otpExpiry } });
     try {
-      await sendOTPEmail(email, name, otp);
-    } catch (emailError) {
-      console.error('Email send failed:', emailError.message);
-    }
+  await sendOTPEmail(email, name, otp);
+} catch (emailError) {
+  console.error('Email send failed:', emailError.message);
+  // Still return success even if email fails
+  return res.status(201).json({ 
+    success: true, 
+    message: 'Registration successful. OTP email may be delayed.', 
+    userId: user._id,
+    // In development, return OTP directly
+    ...(process.env.NODE_ENV === 'development' && { otp })
+  });
+}
+res.status(201).json({ 
+  success: true, 
+  message: 'Registration successful. Please verify your email.', 
+  userId: user._id 
+});
     res.status(201).json({ success: true, message: 'Registration successful. Please verify your email.', userId: user._id });
   } catch (error) { next(error); }
 };
