@@ -1,7 +1,41 @@
-const createTransporter = require('../config/email');
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+const nodemailer = require('nodemailer');
+
+const createTransporter = () => {
+  return nodemailer.createTransport({
+    host: process.env.EMAIL_HOST || 'smtp-relay.brevo.com',
+    port: parseInt(process.env.EMAIL_PORT) || 587,
+    secure: false,
+    tls: {
+      rejectUnauthorized: false
+    },
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    }
+  });
+};
 
 const sendOTPEmail = async (email, name, otp) => {
+  console.log(`📧 Attempting to send OTP to: ${email}`);
+  console.log(`📧 Using SMTP: ${process.env.EMAIL_HOST}:${process.env.EMAIL_PORT}`);
+  console.log(`📧 Auth user: ${process.env.EMAIL_USER}`);
+
   const transporter = createTransporter();
+
+  // Verify connection first
+  await new Promise((resolve, reject) => {
+    transporter.verify((error, success) => {
+      if (error) {
+        console.error('❌ SMTP Verify failed:', error.message);
+        reject(error);
+      } else {
+        console.log('✅ SMTP Connection verified!');
+        resolve(success);
+      }
+    });
+  });
+
   const mailOptions = {
     from: `"ExpenseIQ Pro" <${process.env.EMAIL_USER}>`,
     to: email,
@@ -11,64 +45,54 @@ const sendOTPEmail = async (email, name, otp) => {
       <html>
       <head>
         <style>
-          body { font-family: 'DM Sans', Arial, sans-serif; background: #020617; color: #fff; margin: 0; padding: 0; }
-          .container { max-width: 600px; margin: 40px auto; background: #0f172a; border-radius: 16px; overflow: hidden; border: 1px solid #1e293b; }
-          .header { background: linear-gradient(135deg, #6366f1, #8b5cf6); padding: 40px; text-align: center; }
-          .header h1 { margin: 0; font-size: 28px; color: white; }
-          .body { padding: 40px; }
-          .otp-box { background: #1e293b; border-radius: 12px; padding: 20px; text-align: center; margin: 24px 0; border: 1px solid #334155; }
-          .otp { font-size: 48px; font-weight: bold; color: #6366f1; letter-spacing: 12px; font-family: monospace; }
-          .footer { padding: 24px 40px; background: #020617; text-align: center; color: #64748b; font-size: 12px; }
+          body { font-family: Arial, sans-serif; background: #020617; color: #fff; margin: 0; padding: 20px; }
+          .container { max-width: 500px; margin: 0 auto; background: #0f172a; border-radius: 16px; overflow: hidden; border: 1px solid #1e293b; }
+          .header { background: linear-gradient(135deg, #6366f1, #8b5cf6); padding: 30px; text-align: center; }
+          .header h1 { margin: 0; font-size: 24px; color: white; }
+          .body { padding: 30px; }
+          .otp-box { background: #1e293b; border-radius: 12px; padding: 20px; text-align: center; margin: 20px 0; }
+          .otp { font-size: 42px; font-weight: bold; color: #6366f1; letter-spacing: 10px; font-family: monospace; }
+          .footer { padding: 20px; background: #020617; text-align: center; color: #64748b; font-size: 12px; }
         </style>
       </head>
       <body>
         <div class="container">
-          <div class="header">
-            <h1>💎 ExpenseIQ Pro</h1>
-            <p style="margin:8px 0 0; opacity:0.9;">Understand Your Money. Master Your Future.</p>
-          </div>
+          <div class="header"><h1>💎 ExpenseIQ Pro</h1></div>
           <div class="body">
             <h2 style="color:#e2e8f0;">Hello, ${name}! 👋</h2>
-            <p style="color:#94a3b8; line-height:1.6;">Thank you for signing up for ExpenseIQ Pro. Please verify your email address using the OTP below:</p>
+            <p style="color:#94a3b8;">Your verification code is:</p>
             <div class="otp-box">
-              <p style="color:#64748b; margin:0 0 8px; font-size:14px;">Your Verification Code</p>
               <div class="otp">${otp}</div>
-              <p style="color:#64748b; margin:8px 0 0; font-size:12px;">Expires in 10 minutes</p>
+              <p style="color:#64748b;margin:8px 0 0;font-size:12px;">Expires in 10 minutes</p>
             </div>
-            <p style="color:#94a3b8; font-size:14px;">If you didn't create an account, please ignore this email.</p>
+            <p style="color:#94a3b8;font-size:14px;">If you didn't create an account, ignore this email.</p>
           </div>
-          <div class="footer">
-            <p>© 2026 ExpenseIQ Pro by Obadah Furquan. All rights reserved.</p>
-          </div>
+          <div class="footer">© 2026 ExpenseIQ Pro by Obadah Furquan</div>
         </div>
       </body>
       </html>
-    `
+    `,
+    text: `Hello ${name}, Your ExpenseIQ Pro OTP is: ${otp}. Expires in 10 minutes.`
   };
-  await transporter.sendMail(mailOptions);
+
+  const info = await transporter.sendMail(mailOptions);
+  console.log(`✅ OTP email sent successfully! Message ID: ${info.messageId}`);
+  return info;
 };
 
 const sendWelcomeEmail = async (email, name) => {
-  const transporter = createTransporter();
-  const mailOptions = {
-    from: `"ExpenseIQ Pro" <${process.env.EMAIL_USER}>`,
-    to: email,
-    subject: 'Welcome to ExpenseIQ Pro! 🎉',
-    html: `
-      <!DOCTYPE html>
-      <html>
-      <body style="font-family:Arial,sans-serif;background:#020617;color:#fff;padding:40px;">
-        <div style="max-width:600px;margin:0 auto;background:#0f172a;border-radius:16px;padding:40px;border:1px solid #1e293b;">
-          <h1 style="color:#6366f1;">Welcome, ${name}! 🎉</h1>
-          <p style="color:#94a3b8;">Your account is verified. Start tracking your expenses and achieving your financial goals.</p>
-          <a href="${process.env.CLIENT_URL}/dashboard.html" style="display:inline-block;background:#6366f1;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;margin-top:16px;">Go to Dashboard</a>
-          <p style="color:#475569;font-size:12px;margin-top:24px;">© 2026 Obadah Furquan</p>
-        </div>
-      </body>
-      </html>
-    `
-  };
-  await transporter.sendMail(mailOptions);
+  try {
+    const transporter = createTransporter();
+    await transporter.sendMail({
+      from: `"ExpenseIQ Pro" <${process.env.EMAIL_USER}>`,
+      to: email,
+      subject: 'Welcome to ExpenseIQ Pro! 🎉',
+      text: `Welcome ${name}! Your account is verified. Start tracking your expenses at ${process.env.CLIENT_URL}`
+    });
+    console.log(`✅ Welcome email sent to ${email}`);
+  } catch (e) {
+    console.error('Welcome email failed:', e.message);
+  }
 };
 
 module.exports = { sendOTPEmail, sendWelcomeEmail };
