@@ -7,33 +7,42 @@ const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString()
 exports.register = async (req, res, next) => {
   try {
     const { name, username, email, password } = req.body;
+
     const existingUser = await User.findOne({ $or: [{ email }, { username }] });
     if (existingUser) {
-      return res.status(400).json({ success: false, message: existingUser.email === email ? 'Email already registered' : 'Username already taken' });
+      return res.status(400).json({
+        success: false,
+        message: existingUser.email === email ? 'Email already registered' : 'Username already taken'
+      });
     }
+
     const otp = generateOTP();
     const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
-    const user = await User.create({ name, username, email, password, otp: { code: otp, expiresAt: otpExpiry } });
-    try {
-  await sendOTPEmail(email, name, otp);
-} catch (emailError) {
-  console.error('Email send failed:', emailError.message);
-  // Still return success even if email fails
-  return res.status(201).json({ 
-    success: true, 
-    message: 'Registration successful. OTP email may be delayed.', 
-    userId: user._id,
-    // In development, return OTP directly
-    ...(process.env.NODE_ENV === 'development' && { otp })
-  });
-}
-res.status(201).json({ 
-  success: true, 
-  message: 'Registration successful. Please verify your email.', 
-  userId: user._id 
-});
-    res.status(201).json({ success: true, message: 'Registration successful. Please verify your email.', userId: user._id });
-  } catch (error) { next(error); }
+
+    const user = await User.create({
+      name, username, email, password,
+      otp: { code: otp, expiresAt: otpExpiry }
+    });
+
+    console.log(`✅ User created: ${email}`);
+    console.log(`📧 OTP for ${email}: ${otp}`);
+
+    // Send email without awaiting to prevent double response
+    sendOTPEmail(email, name, otp)
+      .then(() => console.log(`✅ OTP email sent to ${email}`))
+      .catch(err => console.error(`❌ Email failed: ${err.message}`));
+
+    // Return response immediately
+    return res.status(201).json({
+      success: true,
+      message: 'Registration successful. Please verify your email.',
+      userId: user._id,
+      ...(process.env.NODE_ENV === 'development' && { devOTP: otp })
+    });
+
+  } catch (error) {
+    next(error);
+  }
 };
 
 exports.verifyOTP = async (req, res, next) => {
