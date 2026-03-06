@@ -37,7 +37,7 @@ const sendOTPEmail = async (email, name, otp) => {
   });
 
   const mailOptions = {
-    from: `"ExpenseIQ Pro" <${process.env.EMAIL_USER}>`,
+    from: '"ExpenseIQ Pro" <obadah964@gmail.com>',
     to: email,
     subject: 'Verify Your ExpenseIQ Pro Account',
     html: `
@@ -84,7 +84,7 @@ const sendWelcomeEmail = async (email, name) => {
   try {
     const transporter = createTransporter();
     await transporter.sendMail({
-      from: `"ExpenseIQ Pro" <${process.env.EMAIL_USER}>`,
+      from: '"ExpenseIQ Pro" <obadah964@gmail.com>',
       to: email,
       subject: 'Welcome to ExpenseIQ Pro! 🎉',
       text: `Welcome ${name}! Your account is verified. Start tracking your expenses at ${process.env.CLIENT_URL}`
