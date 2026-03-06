@@ -18,26 +18,11 @@ const createTransporter = () => {
 
 const sendOTPEmail = async (email, name, otp) => {
   console.log(`📧 Attempting to send OTP to: ${email}`);
-  console.log(`📧 Using SMTP: ${process.env.EMAIL_HOST}:${process.env.EMAIL_PORT}`);
-  console.log(`📧 Auth user: ${process.env.EMAIL_USER}`);
 
   const transporter = createTransporter();
 
-  // Verify connection first
-  await new Promise((resolve, reject) => {
-    transporter.verify((error, success) => {
-      if (error) {
-        console.error('❌ SMTP Verify failed:', error.message);
-        reject(error);
-      } else {
-        console.log('✅ SMTP Connection verified!');
-        resolve(success);
-      }
-    });
-  });
-
   const mailOptions = {
-    from: '"ExpenseIQ Pro" <obadah964@gmail.com>',
+    from: `"ExpenseIQ Pro" <${process.env.EMAIL_FROM}>`,
     to: email,
     subject: 'Verify Your ExpenseIQ Pro Account',
     html: `
@@ -75,8 +60,9 @@ const sendOTPEmail = async (email, name, otp) => {
     text: `Hello ${name}, Your ExpenseIQ Pro OTP is: ${otp}. Expires in 10 minutes.`
   };
 
+  // Send directly without verify
   const info = await transporter.sendMail(mailOptions);
-  console.log(`✅ OTP email sent successfully! Message ID: ${info.messageId}`);
+  console.log(`✅ OTP email sent! Message ID: ${info.messageId}`);
   return info;
 };
 
