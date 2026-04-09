@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Useful Links — ExpenseIQ Pro</title>
+<link rel="stylesheet" href="css/style.css" /><link rel="stylesheet" href="css/animations.css" />
+<style>
+.links-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; margin-top: 32px; }
+.link-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; transition: var(--transition); text-decoration: none; display: block; }
+.link-card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.2); }
+.link-icon { font-size: 36px; margin-bottom: 14px; }
+.link-title { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.link-desc { font-size: 13px; color: var(--text-muted); line-height: 1.7; margin-bottom: 14px; }
+.link-url { font-size: 12px; color: var(--primary); font-family: var(--font-mono); }
+.link-tag { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 100px; font-size: 11px; font-weight: 600; margin-bottom: 10px; }
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <a href="/" class="nav-brand"><div class="nav-logo">💎</div><span class="nav-name">ExpenseIQ Pro</span></a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="links.html" class="nav-link active">Links</a>
+    <a href="gallery.html" class="nav-link">Gallery</a>
+    <a href="documents.html" class="nav-link">Documents</a>
+    <a href="videos.html" class="nav-link">Videos</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </div>
+  <div class="nav-actions">
+    <a href="login.html" class="btn btn-outline btn-sm">Login</a>
+    <a href="signup.html" class="btn btn-primary btn-sm">Sign Up</a>
+  </div>
+</nav>
+
+<div style="padding: 120px 48px 80px; max-width: 1200px; margin: 0 auto;">
+  <div class="animate-fade">
+    <p style="color:var(--primary);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1px;">Resources</p>
+    <h1 style="font-family:'DM Serif Display',serif;font-size:42px;margin-bottom:12px;">Useful Links</h1>
+    <p style="color:var(--text-muted);font-size:16px;max-width:600px;line-height:1.7;">A curated collection of trusted websites related to personal finance, expense tracking, and financial literacy.</p>
+  </div>
+
+  <div class="links-grid">
+    <a href="https://www.investopedia.com" target="_blank" class="link-card animate-fade stagger-1">
+      <div class="link-icon">📚</div>
+      <div class="link-tag" style="background:rgba(99,102,241,0.1);color:var(--primary);">Education</div>
+      <div class="link-title">Investopedia</div>
+      <div class="link-desc">The world's leading source of financial content on the web. Investopedia offers comprehensive definitions, articles, and tutorials on financial terms, concepts, and investment strategies for beginners and experts alike.</div>
+      <div class="link-url">www.investopedia.com</div>
+    </a>
+    <a href="https://www.mint.com" target="_blank" class="link-card animate-fade stagger-2">
+      <div class="link-icon">💰</div>
+      <div class="link-tag" style="background:rgba(34,197,94,0.1);color:var(--success);">Finance App</div>
+      <div class="link-title">Mint by Intuit</div>
+      <div class="link-desc">Mint is a popular personal finance and budgeting application that helps users track spending, create budgets, and monitor credit scores. It connects to bank accounts for automatic transaction tracking and categorization.</div>
+      <div class="link-url">www.mint.com</div>
+    </a>
+    <a href="https://www.ynab.com" target="_blank" class="link-card animate-fade stagger-3">
+      <div class="link-icon">🎯</div>
+      <div class="link-tag" style="background:rgba(245,158,11,0.1);color:var(--warning);">Budgeting</div>
+      <div class="link-title">YNAB (You Need A Budget)</div>
+      <div class="link-desc">YNAB is a budgeting tool based on the envelope budgeting method. It helps users give every dollar a job, break the paycheck-to-paycheck cycle, and build long-term savings habits through proven budgeting principles.</div>
+      <div class="link-url">www.ynab.com</div>
+    </a>
+    <a href="https://www.nerdwallet.com" target="_blank" class="link-card animate-fade stagger-4">
+      <div class="link-icon">🧠</div>
+      <div class="link-tag" style="background:rgba(99,102,241,0.1);color:var(--primary);">Advice</div>
+      <div class="link-title">NerdWallet</div>
+      <div class="link-desc">NerdWallet provides objective financial advice and tools to help consumers make smart financial decisions. It covers credit cards, banking, investing, mortgages, insurance, and personal loans with unbiased reviews and comparisons.</div>
+      <div class="link-url">www.nerdwallet.com</div>
+    </a>
+    <a href="https://www.personalfinance.org" target="_blank" class="link-card animate-fade stagger-5">
+      <div class="link-icon">🏦</div>
+      <div class="link-tag" style="background:rgba(239,68,68,0.1);color:var(--danger);">Non-Profit</div>
+      <div class="link-title">Personal Finance Institute</div>
+      <div class="link-desc">A non-profit organization dedicated to improving financial literacy among individuals and families. Offers free educational resources, workshops, and tools to help people manage debt, build savings, and achieve financial independence.</div>
+      <div class="link-url">www.personalfinance.org</div>
+    </a>
+    <a href="https://www.rbi.org.in" target="_blank" class="link-card animate-fade stagger-6">
+      <div class="link-icon">🏛️</div>
+      <div class="link-tag" style="background:rgba(34,197,94,0.1);color:var(--success);">Government</div>
+      <div class="link-title">Reserve Bank of India</div>
+      <div class="link-desc">The official website of the Reserve Bank of India provides authoritative information on monetary policy, financial regulations, banking guidelines, and consumer financial protection for Indian residents and businesses.</div>
+      <div class="link-url">www.rbi.org.in</div>
+    </a>
+    <a href="https://www.moneycontrol.com" target="_blank" class="link-card animate-fade stagger-1">
+      <div class="link-icon">📈</div>
+      <div class="link-tag" style="background:rgba(245,158,11,0.1);color:var(--warning);">Markets</div>
+      <div class="link-title">MoneyControl</div>
+      <div class="link-desc">India's leading financial portal offering real-time stock market data, mutual fund information, personal finance news, and investment tools. An essential resource for anyone tracking Indian markets and managing investments.</div>
+      <div class="link-url">www.moneycontrol.com</div>
+    </a>
+    <a href="https://cleartax.in" target="_blank" class="link-card animate-fade stagger-2">
+      <div class="link-icon">🧾</div>
+      <div class="link-tag" style="background:rgba(99,102,241,0.1);color:var(--primary);">Tax</div>
+      <div class="link-title">ClearTax India</div>
+      <div class="link-desc">India's largest tax and financial services platform. ClearTax simplifies income tax filing, GST compliance, and financial planning for individuals and businesses. Provides calculators, guides, and expert advice on Indian taxation.</div>
+      <div class="link-url">cleartax.in</div>
+    </a>
+    <a href="https://economictimes.indiatimes.com/wealth" target="_blank" class="link-card animate-fade stagger-3">
+      <div class="link-icon">📰</div>
+      <div class="link-tag" style="background:rgba(239,68,68,0.1);color:var(--danger);">News</div>
+      <div class="link-title">ET Wealth</div>
+      <div class="link-desc">The Economic Times Wealth section provides expert financial advice, investment strategies, insurance guides, and tax planning tips specifically tailored for Indian readers looking to grow and protect their wealth.</div>
+      <div class="link-url">economictimes.indiatimes.com/wealth</div>
+    </a>
+  </div>
+</div>
+
+<footer style="background:var(--bg-card);border-top:1px solid var(--border);padding:32px;text-align:center;">
+  <p style="color:var(--text-muted);font-size:13px;">© 2026 Obadah Furquan — ExpenseIQ Pro · <a href="privacy-policy.html" style="color:var(--primary);text-decoration:none;">Privacy Policy</a> · <a href="terms.html" style="color:var(--primary);text-decoration:none;">Terms</a></p>
+</footer>
+<script src="js/theme.js"></script>
+</body>
+</html>

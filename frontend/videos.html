@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Videos — ExpenseIQ Pro</title>
+<link rel="stylesheet" href="css/style.css" /><link rel="stylesheet" href="css/animations.css" />
+<style>
+.video-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: var(--transition); }
+.video-card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+.video-embed { position: relative; width: 100%; padding-bottom: 56.25%; background: #000; }
+.video-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+.video-body { padding: 20px; }
+.video-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.video-desc { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+.video-meta { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <a href="/" class="nav-brand"><div class="nav-logo">💎</div><span class="nav-name">ExpenseIQ Pro</span></a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="links.html" class="nav-link">Links</a>
+    <a href="gallery.html" class="nav-link">Gallery</a>
+    <a href="documents.html" class="nav-link">Documents</a>
+    <a href="videos.html" class="nav-link active">Videos</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </div>
+  <div class="nav-actions">
+    <a href="login.html" class="btn btn-outline btn-sm">Login</a>
+    <a href="signup.html" class="btn btn-primary btn-sm">Sign Up</a>
+  </div>
+</nav>
+
+<div style="padding: 120px 48px 80px; max-width: 1200px; margin: 0 auto;">
+  <div class="animate-fade">
+    <p style="color:var(--primary);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1px;">Learn</p>
+    <h1 style="font-family:'DM Serif Display',serif;font-size:42px;margin-bottom:12px;">Finance Videos</h1>
+    <p style="color:var(--text-muted);font-size:16px;max-width:600px;line-height:1.7;">Watch curated YouTube videos on personal finance, budgeting, expense tracking, and financial planning.</p>
+  </div>
+
+  <div class="grid grid-2" style="margin-top:32px;">
+
+    <div class="video-card animate-fade stagger-1">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/HQzoZfc3GwQ" title="Personal Finance Basics" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-body">
+        <div class="video-title">Personal Finance Basics — How to Manage Money</div>
+        <div class="video-desc">This video covers the essential fundamentals of personal finance including how to create a budget, track your expenses, build an emergency fund, and start saving money. Perfect for beginners who want to take control of their finances.</div>
+        <div class="video-meta">
+          <span class="badge-pill badge-primary">Budgeting</span>
+          <span class="badge-pill badge-success">Beginners</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="video-card animate-fade stagger-2">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/xqYDTlTCLAs" title="How to Budget" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-body">
+        <div class="video-title">How to Budget Your Money — The 50/30/20 Rule</div>
+        <div class="video-desc">Learn about the popular 50/30/20 budgeting rule where 50% of income goes to needs, 30% to wants, and 20% to savings. This simple framework can help anyone achieve financial balance and build long-term wealth.</div>
+        <div class="video-meta">
+          <span class="badge-pill badge-primary">Budgeting</span>
+          <span class="badge-pill badge-warning">Finance Tips</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="video-card animate-fade stagger-3">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/Ge0Udbws1k0" title="Expense Tracking" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-body">
+        <div class="video-title">Why You Should Track Your Expenses Every Day</div>
+        <div class="video-desc">Discover why daily expense tracking is one of the most powerful habits for financial success. This video explains how awareness of your spending patterns leads to better decisions and faster achievement of financial goals.</div>
+        <div class="video-meta">
+          <span class="badge-pill badge-success">Habits</span>
+          <span class="badge-pill badge-primary">Tracking</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="video-card animate-fade stagger-4">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/p7HKvqRI_Bo" title="Savings Goals" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-body">
+        <div class="video-title">How to Set and Achieve Financial Goals</div>
+        <div class="video-desc">Learn how to set SMART financial goals (Specific, Measurable, Achievable, Relevant, Time-bound) and create actionable plans to achieve them. Topics include emergency funds, vacation savings, home down payments, and retirement planning.</div>
+        <div class="video-meta">
+          <span class="badge-pill badge-warning">Goals</span>
+          <span class="badge-pill badge-success">Savings</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="video-card animate-fade stagger-5">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/LN9OXRUBc3w" title="Financial Literacy India" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-body">
+        <div class="video-title">Financial Literacy for Young Indians</div>
+        <div class="video-desc">A comprehensive guide to financial literacy specifically for young Indians. Covers topics like managing salary, understanding taxes, investing in mutual funds, and using digital banking tools effectively in the Indian financial ecosystem.</div>
+        <div class="video-meta">
+          <span class="badge-pill badge-primary">India</span>
+          <span class="badge-pill badge-warning">Young Adults</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="video-card animate-fade stagger-6">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/WEDIj9JBTC8" title="Investment Basics" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-body">
+        <div class="video-title">Investment Basics — Where to Put Your Savings</div>
+        <div class="video-desc">Once you have savings, where should you put them? This video explains different investment options including fixed deposits, mutual funds, stocks, and gold. Learn how to make your money work for you with smart investment strategies.</div>
+        <div class="video-meta">
+          <span class="badge-pill badge-success">Investment</span>
+          <span class="badge-pill badge-primary">Wealth Building</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer style="background:var(--bg-card);border-top:1px solid var(--border);padding:32px;text-align:center;">
+  <p style="color:var(--text-muted);font-size:13px;">© 2026 Obadah Furquan — ExpenseIQ Pro · <a href="privacy-policy.html" style="color:var(--primary);text-decoration:none;">Privacy Policy</a></p>
+</footer>
+<script src="js/theme.js"></script>
+</body>
+</html>

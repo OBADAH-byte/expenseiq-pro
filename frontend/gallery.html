@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gallery — ExpenseIQ Pro</title>
+<link rel="stylesheet" href="css/style.css" /><link rel="stylesheet" href="css/animations.css" />
+<style>
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 32px; }
+.gallery-item { position: relative; border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-card); border: 1px solid var(--border); transition: var(--transition); aspect-ratio: 16/10; }
+.gallery-item:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.3); border-color: var(--primary); }
+.gallery-item a { display: block; width: 100%; height: 100%; }
+.gallery-img { width: 100%; height: 100%; object-fit: cover; display: flex; align-items: center; justify-content: center; font-size: 64px; background: linear-gradient(135deg, var(--bg-elevated), var(--bg-card)); }
+.gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: var(--transition); display: flex; align-items: flex-end; padding: 16px; }
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-caption { color: #fff; font-size: 13px; font-weight: 600; }
+.gallery-sub { color: rgba(255,255,255,0.7); font-size: 11px; margin-top: 2px; }
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <a href="/" class="nav-brand"><div class="nav-logo">💎</div><span class="nav-name">ExpenseIQ Pro</span></a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="links.html" class="nav-link">Links</a>
+    <a href="gallery.html" class="nav-link active">Gallery</a>
+    <a href="documents.html" class="nav-link">Documents</a>
+    <a href="videos.html" class="nav-link">Videos</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </div>
+  <div class="nav-actions">
+    <a href="login.html" class="btn btn-outline btn-sm">Login</a>
+    <a href="signup.html" class="btn btn-primary btn-sm">Sign Up</a>
+  </div>
+</nav>
+
+<div style="padding: 120px 48px 80px; max-width: 1200px; margin: 0 auto;">
+  <div class="animate-fade">
+    <p style="color:var(--primary);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1px;">Visual Guide</p>
+    <h1 style="font-family:'DM Serif Display',serif;font-size:42px;margin-bottom:12px;">App Gallery</h1>
+    <p style="color:var(--text-muted);font-size:16px;max-width:600px;line-height:1.7;">Explore screenshots and visual representations of ExpenseIQ Pro's features and interface design.</p>
+  </div>
+
+  <div class="gallery-grid">
+    <div class="gallery-item animate-fade stagger-1">
+      <a href="https://expenseiq-pro.onrender.com" target="_blank">
+        <div class="gallery-img" style="background:linear-gradient(135deg,#020617,#1e1b4b);">💎</div>
+        <div class="gallery-overlay"><div><div class="gallery-caption">Landing Page</div><div class="gallery-sub">expenseiq-pro.onrender.com</div></div></div>
+      </a>
+    </div>
+    <div class="gallery-item animate-fade stagger-2">
+      <a href="https://expenseiq-pro.onrender.com/dashboard.html" target="_blank">
+        <div class="gallery-img" style="background:linear-gradient(135deg,#0f172a,#1e293b);">📊</div>
+        <div class="gallery-overlay"><div><div class="gallery-caption">Dashboard</div><div class="gallery-sub">Financial overview with charts</div></div></div>
+      </a>
+    </div>
+    <div class="gallery-item animate-fade stagger-3">
+      <a href="https://expenseiq-pro.onrender.com/expenses.html" target="_blank">
+        <div class="gallery-img" style="background:linear-gradient(135deg,#1e1b4b,#312e81);">💳</div>
+        <div class="gallery-overlay"><div><div class="gallery-caption">Expense Tracker</div><div class="gallery-sub">Full CRUD expense management</div></div></div>
+      </a>
+    </div>
+    <div class="gallery-item animate-fade stagger-4">
+      <a href="https://expenseiq-pro.onrender.com/goals.html" target="_blank">
+        <div class="gallery-img" style="background:linear-gradient(135deg,#052e16,#166534);">🎯</div>
+        <div class="gallery-overlay"><div><div class="gallery-caption">Savings Goals</div><div class="gallery-sub">Track progress toward targets</div></div></div>
+      </a>
+    </div>
+    <div class="gallery-item animate-fade stagger-5">
+      <a href="https://expenseiq-pro.onrender.com/badges.html" target="_blank">
+        <div class="gallery-img" style="background:linear-gradient(135deg,#451a03,#92400e);">🏆</div>
+        <div class="gallery-overlay"><div><div class="gallery-caption">Achievement Badges</div><div class="gallery-sub">10 gamification badges</div></div></div>
+      </a>
+    </div>
+    <div class="gallery-item animate-fade stagger-6">
+      <a href="https://expenseiq-pro.onrender.com/reports.html" target="_blank">
+        <div class="gallery-img" style="background:linear-gradient(135deg,#0c1445,#1e3a8a);">📄</div>
+        <div class="gallery-overlay"><div><div class="gallery-caption">Monthly Reports</div><div class="gallery-sub">Export to CSV and PDF</div></div></div>
+      </a>
+    </div>
+    <div class="gallery-item animate-fade stagger-1">
+      <a href="https://expenseiq-pro.onrender.com/signup.html" target="_blank">
+        <div class="gallery-img" style="background:linear-gradient(135deg,#1a0533,#4c1d95);">✉️</div>
+        <div class="gallery-overlay"><div><div class="gallery-caption">OTP Verification</div><div class="gallery-sub">Email verification system</div></div></div>
+      </a>
+    </div>
+    <div class="gallery-item animate-fade stagger-2">
+      <a href="https://expenseiq-pro.onrender.com/settings.html" target="_blank">
+        <div class="gallery-img" style="background:linear-gradient(135deg,#0f1d1a,#134e4a);">⚙️</div>
+        <div class="gallery-overlay"><div><div class="gallery-caption">Settings</div><div class="gallery-sub">Profile and preferences</div></div></div>
+      </a>
+    </div>
+    <div class="gallery-item animate-fade stagger-3">
+      <a href="https://expenseiq-pro.onrender.com/login.html" target="_blank">
+        <div class="gallery-img" style="background:linear-gradient(135deg,#1c0a02,#7c2d12);">🔒</div>
+        <div class="gallery-overlay"><div><div class="gallery-caption">Login Page</div><div class="gallery-sub">Secure JWT authentication</div></div></div>
+      </a>
+    </div>
+    <div class="gallery-item animate-fade stagger-4">
+      <a href="https://expenseiq-pro.onrender.com/developer.html" target="_blank">
+        <div class="gallery-img" style="background:linear-gradient(135deg,#020617,#0f172a);">👨‍💻</div>
+        <div class="gallery-overlay"><div><div class="gallery-caption">Developer Page</div><div class="gallery-sub">Obadah Furquan</div></div></div>
+      </a>
+    </div>
+    <div class="gallery-item animate-fade stagger-5">
+      <a href="https://chart.js" target="_blank">
+        <div class="gallery-img" style="background:linear-gradient(135deg,#0a1628,#1e40af);">📈</div>
+        <div class="gallery-overlay"><div><div class="gallery-caption">Chart.js Visualization</div><div class="gallery-sub">Powered by Chart.js library</div></div></div>
+      </a>
+    </div>
+    <div class="gallery-item animate-fade stagger-6">
+      <a href="https://threejs.org" target="_blank">
+        <div class="gallery-img" style="background:linear-gradient(135deg,#0a0a0a,#1a1a2e);">🌐</div>
+        <div class="gallery-overlay"><div><div class="gallery-caption">Three.js Background</div><div class="gallery-sub">3D animated hero section</div></div></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer style="background:var(--bg-card);border-top:1px solid var(--border);padding:32px;text-align:center;">
+  <p style="color:var(--text-muted);font-size:13px;">© 2026 Obadah Furquan — ExpenseIQ Pro · <a href="privacy-policy.html" style="color:var(--primary);text-decoration:none;">Privacy Policy</a></p>
+</footer>
+<script src="js/theme.js"></script>
+</body>
+</html>

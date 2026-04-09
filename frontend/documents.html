@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Documents — ExpenseIQ Pro</title>
+<link rel="stylesheet" href="css/style.css" /><link rel="stylesheet" href="css/animations.css" />
+<style>
+.doc-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; transition: var(--transition); }
+.doc-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+.doc-icon { font-size: 40px; margin-bottom: 16px; }
+.ref-link { display: flex; align-items: center; gap: 10px; padding: 12px; background: var(--bg-elevated); border-radius: 10px; margin-bottom: 8px; text-decoration: none; color: var(--text); transition: var(--transition); }
+.ref-link:hover { background: var(--border); color: var(--primary); }
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <a href="/" class="nav-brand"><div class="nav-logo">💎</div><span class="nav-name">ExpenseIQ Pro</span></a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="links.html" class="nav-link">Links</a>
+    <a href="gallery.html" class="nav-link">Gallery</a>
+    <a href="documents.html" class="nav-link active">Documents</a>
+    <a href="videos.html" class="nav-link">Videos</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </div>
+  <div class="nav-actions">
+    <a href="login.html" class="btn btn-outline btn-sm">Login</a>
+    <a href="signup.html" class="btn btn-primary btn-sm">Sign Up</a>
+  </div>
+</nav>
+
+<div style="padding: 120px 48px 80px; max-width: 1100px; margin: 0 auto;">
+  <div class="animate-fade">
+    <p style="color:var(--primary);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1px;">Resources</p>
+    <h1 style="font-family:'DM Serif Display',serif;font-size:42px;margin-bottom:12px;">Documents</h1>
+    <p style="color:var(--text-muted);font-size:16px;max-width:600px;line-height:1.7;">Original documents, guides, and financial literacy resources related to personal finance management.</p>
+  </div>
+
+  <div class="grid grid-2" style="margin-top:32px;gap:24px;">
+
+    <!-- Document 1 -->
+    <div class="doc-card animate-fade stagger-1">
+      <div class="doc-icon">📖</div>
+      <h2 style="font-size:18px;font-weight:700;margin-bottom:8px;">Personal Finance Guide for Students</h2>
+      <span class="badge-pill badge-primary" style="margin-bottom:12px;">Original Document</span>
+      <p style="color:var(--text-muted);font-size:14px;line-height:1.7;margin-bottom:16px;">A comprehensive guide covering the fundamentals of personal finance management for college students. Topics include budgeting basics, expense tracking, building an emergency fund, and setting financial goals.</p>
+      <div style="background:var(--bg-elevated);border-radius:10px;padding:16px;font-size:13px;color:var(--text-muted);line-height:1.8;">
+        <strong style="color:var(--text);">Contents:</strong><br/>
+        1. Why Personal Finance Matters<br/>
+        2. The 50/30/20 Budgeting Rule<br/>
+        3. How to Track Daily Expenses<br/>
+        4. Building an Emergency Fund<br/>
+        5. Setting SMART Financial Goals<br/>
+        6. Understanding Credit and Debt<br/>
+        7. Introduction to Saving and Investing<br/>
+        8. Using ExpenseIQ Pro for Financial Management
+      </div>
+      <div style="margin-top:16px;padding:14px;background:rgba(99,102,241,0.05);border:1px solid rgba(99,102,241,0.2);border-radius:10px;">
+        <p style="font-size:13px;color:var(--text-muted);font-style:italic;">"Financial freedom is available to those who learn about it and work for it." — Robert Kiyosaki</p>
+      </div>
+    </div>
+
+    <!-- Document 2 -->
+    <div class="doc-card animate-fade stagger-2">
+      <div class="doc-icon">💡</div>
+      <h2 style="font-size:18px;font-weight:700;margin-bottom:8px;">ExpenseIQ Pro Technical Documentation</h2>
+      <span class="badge-pill badge-success" style="margin-bottom:12px;">Technical Guide</span>
+      <p style="color:var(--text-muted);font-size:14px;line-height:1.7;margin-bottom:16px;">Complete technical documentation for ExpenseIQ Pro covering the full-stack architecture, database design, API endpoints, authentication flow, and deployment configuration.</p>
+      <div style="background:var(--bg-elevated);border-radius:10px;padding:16px;font-size:13px;color:var(--text-muted);line-height:1.8;">
+        <strong style="color:var(--text);">Contents:</strong><br/>
+        1. System Architecture Overview<br/>
+        2. Technology Stack Details<br/>
+        3. Database Schema and Models<br/>
+        4. REST API Endpoints<br/>
+        5. Authentication System<br/>
+        6. Email OTP Verification<br/>
+        7. Deployment on Render.com<br/>
+        8. Security Implementation
+      </div>
+      <div style="margin-top:16px;">
+        <a href="ExpenseIQ_Pro_Documentation.pdf" class="btn btn-primary btn-sm" download>📄 Download PDF Documentation</a>
+      </div>
+    </div>
+
+    <!-- Document 3 -->
+    <div class="doc-card animate-fade stagger-3" style="grid-column:1/-1;">
+      <div class="doc-icon">🇮🇳</div>
+      <h2 style="font-size:18px;font-weight:700;margin-bottom:8px;">Financial Literacy in India — Key Facts</h2>
+      <span class="badge-pill badge-warning" style="margin-bottom:12px;">Research Document</span>
+      <p style="color:var(--text-muted);font-size:14px;line-height:1.7;margin-bottom:16px;">An original research document exploring the state of financial literacy in India and how digital tools like ExpenseIQ Pro can help bridge the knowledge gap among young Indians.</p>
+      <div class="grid grid-3" style="gap:16px;margin-top:16px;">
+        <div style="background:var(--bg-elevated);border-radius:10px;padding:16px;text-align:center;">
+          <div style="font-size:28px;font-weight:700;color:var(--primary);font-family:var(--font-mono);">27%</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">Financial literacy rate in India (NCFE 2019)</div>
+        </div>
+        <div style="background:var(--bg-elevated);border-radius:10px;padding:16px;text-align:center;">
+          <div style="font-size:28px;font-weight:700;color:var(--success);font-family:var(--font-mono);">56%</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">Indians who don't track monthly expenses</div>
+        </div>
+        <div style="background:var(--bg-elevated);border-radius:10px;padding:16px;text-align:center;">
+          <div style="font-size:28px;font-weight:700;color:var(--warning);font-family:var(--font-mono);">₹2.5L</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">Average annual savings potential when budgeting</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- References -->
+  <div style="margin-top:48px;" class="animate-fade stagger-4">
+    <h2 style="font-family:'DM Serif Display',serif;font-size:24px;margin-bottom:20px;">📚 References</h2>
+    <a href="https://www.ncfe.org.in" target="_blank" class="ref-link">🔗 National Centre for Financial Education (NCFE) — ncfe.org.in</a>
+    <a href="https://www.rbi.org.in" target="_blank" class="ref-link">🔗 Reserve Bank of India — rbi.org.in</a>
+    <a href="https://www.investopedia.com" target="_blank" class="ref-link">🔗 Investopedia — Financial Education Resource — investopedia.com</a>
+    <a href="https://www.mongodb.com/docs" target="_blank" class="ref-link">🔗 MongoDB Documentation — mongodb.com/docs</a>
+    <a href="https://expressjs.com" target="_blank" class="ref-link">🔗 Express.js Official Documentation — expressjs.com</a>
+    <a href="https://www.chartjs.org/docs" target="_blank" class="ref-link">🔗 Chart.js Documentation — chartjs.org/docs</a>
+  </div>
+</div>
+
+<footer style="background:var(--bg-card);border-top:1px solid var(--border);padding:32px;text-align:center;">
+  <p style="color:var(--text-muted);font-size:13px;">© 2026 Obadah Furquan — ExpenseIQ Pro · All intellectual property rights reserved.</p>
+</footer>
+<script src="js/theme.js"></script>
+</body>
+</html>

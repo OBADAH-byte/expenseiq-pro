@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact — ExpenseIQ Pro</title>
+<link rel="stylesheet" href="css/style.css" /><link rel="stylesheet" href="css/animations.css" />
+<style>
+.contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; margin-top: 40px; align-items: start; }
+.contact-info-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; display: flex; align-items: center; gap: 16px; margin-bottom: 16px; transition: var(--transition); }
+.contact-info-card:hover { border-color: var(--primary); transform: translateX(4px); }
+.contact-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(99,102,241,0.15); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+.contact-form { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px; }
+.success-msg { display: none; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); color: var(--success); padding: 14px; border-radius: 10px; margin-bottom: 16px; font-size: 14px; }
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <a href="/" class="nav-brand"><div class="nav-logo">💎</div><span class="nav-name">ExpenseIQ Pro</span></a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="links.html" class="nav-link">Links</a>
+    <a href="gallery.html" class="nav-link">Gallery</a>
+    <a href="documents.html" class="nav-link">Documents</a>
+    <a href="videos.html" class="nav-link">Videos</a>
+    <a href="contact.html" class="nav-link active">Contact</a>
+  </div>
+  <div class="nav-actions">
+    <a href="login.html" class="btn btn-outline btn-sm">Login</a>
+    <a href="signup.html" class="btn btn-primary btn-sm">Sign Up</a>
+  </div>
+</nav>
+
+<div style="padding: 120px 48px 80px; max-width: 1100px; margin: 0 auto;">
+  <div class="animate-fade" style="text-align:center;max-width:600px;margin:0 auto 20px;">
+    <p style="color:var(--primary);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1px;">Get In Touch</p>
+    <h1 style="font-family:'DM Serif Display',serif;font-size:42px;margin-bottom:12px;">Contact Me</h1>
+    <p style="color:var(--text-muted);font-size:16px;line-height:1.7;">Have a question about ExpenseIQ Pro? Want to collaborate or give feedback? I'd love to hear from you!</p>
+  </div>
+
+  <div class="contact-grid">
+    <!-- Contact Info -->
+    <div class="animate-fade stagger-1">
+      <div style="background:linear-gradient(135deg,var(--primary),#8b5cf6);border-radius:var(--radius-lg);padding:32px;color:#fff;margin-bottom:24px;text-align:center;">
+        <div style="font-size:56px;margin-bottom:12px;">👨‍💻</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:24px;margin-bottom:4px;">Obadah Furquan</div>
+        <div style="opacity:0.85;font-size:14px;">Full-Stack Developer · India 🇮🇳</div>
+      </div>
+
+      <div class="contact-info-card">
+        <div class="contact-icon">📧</div>
+        <div>
+          <div style="font-size:12px;color:var(--text-muted);margin-bottom:2px;">Email</div>
+          <a href="mailto:obadah964@gmail.com" style="font-size:15px;font-weight:600;color:var(--primary);text-decoration:none;">obadah964@gmail.com</a>
+        </div>
+      </div>
+
+      <div class="contact-info-card">
+        <div class="contact-icon">🐙</div>
+        <div>
+          <div style="font-size:12px;color:var(--text-muted);margin-bottom:2px;">GitHub</div>
+          <a href="https://github.com/OBADAH-byte" target="_blank" style="font-size:15px;font-weight:600;color:var(--primary);text-decoration:none;">github.com/OBADAH-byte</a>
+        </div>
+      </div>
+
+      <div class="contact-info-card">
+        <div class="contact-icon">🌐</div>
+        <div>
+          <div style="font-size:12px;color:var(--text-muted);margin-bottom:2px;">Live Website</div>
+          <a href="https://expenseiq-pro.onrender.com" target="_blank" style="font-size:15px;font-weight:600;color:var(--primary);text-decoration:none;">expenseiq-pro.onrender.com</a>
+        </div>
+      </div>
+
+      <div class="contact-info-card">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div style="font-size:12px;color:var(--text-muted);margin-bottom:2px;">Location</div>
+          <div style="font-size:15px;font-weight:600;">India 🇮🇳</div>
+        </div>
+      </div>
+
+      <div class="contact-info-card">
+        <div class="contact-icon">🎓</div>
+        <div>
+          <div style="font-size:12px;color:var(--text-muted);margin-bottom:2px;">Course</div>
+          <div style="font-size:15px;font-weight:600;">BCA SEE411 — Internet & Web Technology</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="contact-form animate-fade stagger-2">
+      <h2 style="font-family:'DM Serif Display',serif;font-size:24px;margin-bottom:20px;">Send a Message</h2>
+      <div class="success-msg" id="success-msg">✅ Message sent successfully! I'll get back to you soon.</div>
+      <div class="form-group">
+        <label class="form-label">Your Name *</label>
+        <input type="text" id="c-name" class="form-control" placeholder="Your full name" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address *</label>
+        <input type="email" id="c-email" class="form-control" placeholder="your@email.com" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Subject *</label>
+        <select id="c-subject" class="form-control">
+          <option value="">Select a subject</option>
+          <option>General Question</option>
+          <option>Bug Report</option>
+          <option>Feature Request</option>
+          <option>Collaboration</option>
+          <option>Project Feedback</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Message *</label>
+        <textarea id="c-message" class="form-control" rows="5" placeholder="Write your message here..." style="resize:vertical;"></textarea>
+      </div>
+      <button class="btn btn-primary" style="width:100%;" onclick="sendMessage()">📨 Send Message</button>
+      <p style="font-size:12px;color:var(--text-faint);margin-top:12px;text-align:center;">I typically respond within 24-48 hours.</p>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div style="margin-top:60px;" class="animate-fade stagger-3">
+    <h2 style="font-family:'DM Serif Display',serif;font-size:28px;margin-bottom:24px;text-align:center;">Frequently Asked Questions</h2>
+    <div class="grid grid-2" style="gap:16px;">
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;">
+        <div style="font-weight:600;margin-bottom:6px;">Is ExpenseIQ Pro free to use?</div>
+        <div style="font-size:13px;color:var(--text-muted);">Yes! ExpenseIQ Pro is completely free to use. Create an account and start tracking your expenses immediately.</div>
+      </div>
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;">
+        <div style="font-weight:600;margin-bottom:6px;">Is my financial data secure?</div>
+        <div style="font-size:13px;color:var(--text-muted);">Absolutely. Passwords are hashed with bcrypt, all connections use HTTPS, and data is stored securely on MongoDB Atlas.</div>
+      </div>
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;">
+        <div style="font-weight:600;margin-bottom:6px;">Which currencies are supported?</div>
+        <div style="font-size:13px;color:var(--text-muted);">ExpenseIQ Pro supports USD ($), EUR (€), GBP (£), and INR (₹). You can change your preferred currency in Settings.</div>
+      </div>
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;">
+        <div style="font-weight:600;margin-bottom:6px;">Can I export my data?</div>
+        <div style="font-size:13px;color:var(--text-muted);">Yes! You can export your expense data as CSV from the Expenses page, and generate monthly reports from the Reports page.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer style="background:var(--bg-card);border-top:1px solid var(--border);padding:32px;text-align:center;">
+  <p style="color:var(--text-muted);font-size:13px;">© 2026 Obadah Furquan — ExpenseIQ Pro · Made in India 🇮🇳</p>
+</footer>
+
+<script src="js/theme.js"></script>
+<script>
+function sendMessage() {
+  const name = document.getElementById('c-name').value.trim();
+  const email = document.getElementById('c-email').value.trim();
+  const subject = document.getElementById('c-subject').value;
+  const message = document.getElementById('c-message').value.trim();
+  if (!name || !email || !subject || !message) { alert('Please fill in all fields.'); return; }
+  const btn = event.target; btn.disabled = true; btn.textContent = 'Sending...';
+  setTimeout(() => {
+    document.getElementById('success-msg').style.display = 'block';
+    document.getElementById('c-name').value = '';
+    document.getElementById('c-email').value = '';
+    document.getElementById('c-subject').value = '';
+    document.getElementById('c-message').value = '';
+    btn.disabled = false; btn.textContent = '📨 Send Message';
+    window.scrollTo(0, document.getElementById('success-msg').offsetTop - 100);
+  }, 1500);
+}
+</script>
+</body>
+</html>
