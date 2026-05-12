@@ -137,3 +137,33 @@ exports.changePassword = async (req, res, next) => {
     res.json({ success: true, message: 'Password changed successfully' });
   } catch (error) { next(error); }
 };
+
+exports.forgotPassword = async (req, res, next) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email, isVerified: true });
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'No verified account found with this email' });
+    }
+    const otp = generateOTP();
+    user.otp = { code: otp, expiresAt: new Date(Date.now() + 10 * 60 * 1000) };
+    await user.save();
+    await sendOTPEmail(email, user.name, otp);
+    res.json({ success: true, message: 'Password reset OTP sent to your email', userId: user._id });
+  } catch (error) { next(error); }
+};
+
+exports.resetPassword = async (req, res, next) => {
+  try {
+    const { userId, otp, newPassword } = req.body;
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ success: false, message: 'User not found' });
+    if (!user.otp || user.otp.code !== otp) return res.status(400).json({ success: false, message: 'Invalid OTP' });
+    if (user.otp.expiresAt < new Date()) return res.status(400).json({ success: false, message: 'OTP expired' });
+    if (newPassword.length < 6) return res.status(400).json({ success: false, message: 'Password must be at least 6 characters' });
+    user.password = newPassword;
+    user.otp = undefined;
+    await user.save();
+    res.json({ success: true, message: 'Password reset successfully! Please login.' });
+  } catch (error) { next(error); }
+};
