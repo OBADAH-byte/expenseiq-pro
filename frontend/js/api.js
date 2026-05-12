@@ -28,7 +28,9 @@ const API = {
     guest: () => request('POST', '/auth/guest'),
     me: () => request('GET', '/auth/me'),
     updateProfile: (data) => request('PUT', '/auth/profile', data),
-    changePassword: (data) => request('PUT', '/auth/change-password', data),
+    changePassword: (data) => request('PUT', '/auth/change-password', data),changePassword: (data) => request('PUT', '/auth/change-password', data),
+    forgotPassword: (data) => request('POST', '/auth/forgot-password', data),
+    resetPassword: (data) => request('POST', '/auth/reset-password', data),
   },
   expenses: {
     getAll: (params = {}) => {
