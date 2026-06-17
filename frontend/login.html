@@ -33,12 +33,15 @@
         <input type="email" id="email" class="form-control" placeholder="you@example.com" required />
       </div>
       <div class="form-group">
-        <label class="form-label">Password</label>
-        <div class="password-wrapper">
-          <input type="password" id="password" class="form-control" placeholder="Enter your password" required />
-          <button class="password-toggle" onclick="togglePwd()">👁️</button>
-        </div>
-      </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;">
+    <label class="form-label" style="margin-bottom:0;">Password</label>
+    <a href="#" onclick="showForgotPassword()" style="font-size:12px;color:var(--primary-light);text-decoration:none;font-weight:600;">Forgot password?</a>
+  </div>
+  <div class="password-wrapper">
+    <input type="password" id="password" class="form-control" placeholder="Enter your password" required />
+    <button class="password-toggle" onclick="togglePwd()">👁️</button>
+  </div>
+</div>
       <button class="btn btn-primary" style="width:100%;margin-top:8px;" id="login-btn" onclick="handleLogin()">Sign In</button>
       <div class="auth-divider">or</div>
       <button class="btn btn-outline" style="width:100%;" onclick="handleGuest()">👤 Continue as Guest</button>
@@ -46,6 +49,47 @@
     </div>
   </div>
 </div>
+
+<!-- Forgot Password Modal -->
+<div class="modal-overlay" id="forgot-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title">Reset Password</h3>
+      <button class="modal-close" onclick="closeForgotModal()">✕</button>
+    </div>
+    <div id="forgot-step-1">
+      <p style="color:var(--text-muted);font-size:14px;margin-bottom:20px;">Enter your email address and we'll send you an OTP to reset your password.</p>
+      <div id="forgot-error" style="display:none;background:var(--danger-subtle);border:1px solid var(--danger);color:var(--danger);padding:12px;border-radius:10px;margin-bottom:16px;font-size:14px;"></div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input type="email" id="forgot-email" class="form-control" placeholder="your@email.com" />
+      </div>
+      <button class="btn btn-primary" style="width:100%;" onclick="sendForgotOTP()">Send OTP</button>
+    </div>
+    <div id="forgot-step-2" style="display:none;">
+      <p style="color:var(--text-muted);font-size:14px;margin-bottom:20px;">Enter the OTP sent to your email and your new password.</p>
+      <div id="reset-error" style="display:none;background:var(--danger-subtle);border:1px solid var(--danger);color:var(--danger);padding:12px;border-radius:10px;margin-bottom:16px;font-size:14px;"></div>
+      <div class="otp-inputs">
+        <input type="text" class="otp-input" maxlength="1" oninput="resetOtpInput(this,0)" id="rotp0" />
+        <input type="text" class="otp-input" maxlength="1" oninput="resetOtpInput(this,1)" id="rotp1" />
+        <input type="text" class="otp-input" maxlength="1" oninput="resetOtpInput(this,2)" id="rotp2" />
+        <input type="text" class="otp-input" maxlength="1" oninput="resetOtpInput(this,3)" id="rotp3" />
+        <input type="text" class="otp-input" maxlength="1" oninput="resetOtpInput(this,4)" id="rotp4" />
+        <input type="text" class="otp-input" maxlength="1" oninput="resetOtpInput(this,5)" id="rotp5" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">New Password</label>
+        <input type="password" id="new-password" class="form-control" placeholder="Min 6 characters" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Confirm New Password</label>
+        <input type="password" id="confirm-new-password" class="form-control" placeholder="Repeat new password" />
+      </div>
+      <button class="btn btn-primary" style="width:100%;" onclick="doResetPassword()">Reset Password</button>
+    </div>
+  </div>
+</div>
+
 <script src="js/theme.js"></script>
 <script src="js/api.js"></script>
 <script>
@@ -56,25 +100,103 @@ function togglePwd() {
   p.type = p.type === 'password' ? 'text' : 'password';
 }
 
-async function handleLogin() {
-  const email = document.getElementById('email').value.trim();
-  const password = document.getElementById('password').value;
-  const btn = document.getElementById('login-btn');
-  const err = document.getElementById('error-msg');
-  if (!email || !password) { showError('Please fill in all fields'); return; }
-  btn.disabled = true; btn.textContent = 'Signing in...';
+let forgotUserId = null;
+
+function showForgotPassword() {
+  document.getElementById('forgot-modal').classList.add('active');
+  setTimeout(() => document.getElementById('forgot-email').focus(), 300);
+}
+
+function closeForgotModal() {
+  document.getElementById('forgot-modal').classList.remove('active');
+  document.getElementById('forgot-step-1').style.display = 'block';
+  document.getElementById('forgot-step-2').style.display = 'none';
+  document.getElementById('forgot-email').value = '';
+  document.getElementById('forgot-error').style.display = 'none';
+  document.getElementById('reset-error').style.display = 'none';
+  forgotUserId = null;
+}
+
+async function sendForgotOTP() {
+  const email = document.getElementById('forgot-email').value.trim();
+  if (!email) { showForgotError('Please enter your email'); return; }
+  const btn = event.target;
+  btn.disabled = true; btn.textContent = 'Sending...';
   try {
-    const data = await API.auth.login({ email, password });
-    setAuth(data.token, data.user);
-    showToast('Welcome back, ' + data.user.name + '! 👋');
-    setTimeout(() => window.location.href = '/dashboard.html', 800);
-  } catch (e) {
-    if (e.message.includes('verify')) { showError(e.message + ' — <a href="signup.html" style="color:var(--primary)">Verify email</a>'); }
-    else showError(e.message || 'Login failed');
-    btn.disabled = false; btn.textContent = 'Sign In';
+    const data = await API.auth.forgotPassword({ email });
+    forgotUserId = data.userId;
+    document.getElementById('forgot-step-1').style.display = 'none';
+    document.getElementById('forgot-step-2').style.display = 'block';
+    showToast('OTP sent to your email! 📧');
+    document.getElementById('rotp0').focus();
+  } catch(e) {
+    showForgotError(e.message);
+    btn.disabled = false; btn.textContent = 'Send OTP';
   }
 }
 
+function resetOtpInput(el, idx) {
+  el.value = el.value.replace(/\D/g, '');
+  if (el.value && idx < 5) document.getElementById('rotp' + (idx+1)).focus();
+  if (!el.value && idx > 0) document.getElementById('rotp' + (idx-1)).focus();
+}
+
+async function doResetPassword() {
+  const otp = Array.from(
+    { length: 6 },
+    (_, i) => document.getElementById(`rotp${i}`)?.value || ''
+  ).join('');
+
+  const newPassword = document.getElementById('new-password').value.trim();
+  const confirmPassword = document.getElementById('confirm-new-password').value.trim();
+  const btn = document.getElementById('reset-btn');
+
+  document.getElementById('reset-error').style.display = 'none';
+
+  if (otp.length !== 6) {
+    return showResetError('Please enter the complete OTP');
+  }
+
+  if (!newPassword) {
+    return showResetError('Please enter a new password');
+  }
+
+  if (newPassword.length < 6) {
+    return showResetError('Password must be at least 6 characters');
+  }
+
+  if (newPassword !== confirmPassword) {
+    return showResetError('Passwords do not match');
+  }
+
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = 'Resetting...';
+  }
+
+  try {
+    const response = await API.auth.resetPassword({
+      userId: forgotUserId,
+      otp,
+      newPassword
+    });
+
+    showToast(response?.message || 'Password reset successfully! ✅');
+
+    setTimeout(() => {
+      closeForgotModal();
+    }, 1000);
+
+  } catch (err) {
+
+    showResetError(err?.message || 'Password reset failed');
+
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = 'Reset Password';
+    }
+  }
+}
 async function handleGuest() {
   const btn = event.target;
   btn.disabled = true; btn.textContent = 'Loading...';
@@ -83,7 +205,10 @@ async function handleGuest() {
     setAuth(data.token, data.user);
     showToast('Welcome, Guest! 👤');
     setTimeout(() => window.location.href = '/dashboard.html', 800);
-  } catch (e) { showError('Guest login failed'); btn.disabled = false; btn.textContent = '👤 Continue as Guest'; }
+  } catch(e) {
+    showToast('Guest login failed', 'error');
+    btn.disabled = false; btn.textContent = '👤 Continue as Guest';
+  }
 }
 
 function showError(msg) {
@@ -92,6 +217,10 @@ function showError(msg) {
 }
 
 document.addEventListener('keydown', e => { if (e.key === 'Enter') handleLogin(); });
+
+document.getElementById('forgot-modal').addEventListener('click', e => {
+  if (e.target === document.getElementById('forgot-modal')) closeForgotModal();
+});
 </script>
 </body>
 </html>
